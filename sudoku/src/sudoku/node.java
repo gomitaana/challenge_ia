@@ -1,11 +1,7 @@
 package sudoku;
 
-/**
- *
- * @author anamariagonzalez
- */
 public class node {
-   //Dimensions of the node
+	//Dimensions of the node
 	int row;
 	int col;
 	int value;
@@ -25,5 +21,5 @@ public class node {
 	
 	public int getValue(){
 		return this.value;
-	} 
+	}
 }

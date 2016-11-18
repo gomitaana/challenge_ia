@@ -1,11 +1,7 @@
 package sudoku;
 
-/**
- *
- * @author anamariagonzalez
- */
 public class main {
-    static int sudoku[][] = { 
+	static int sudoku[][] = { 
 			{ 2, 0, 0, 8, 0, 4, 0, 0, 6 }, 
 			{ 0, 0, 6, 0, 0, 0, 5, 0, 0 }, 
 			{ 0, 7, 4, 0, 0, 0, 9, 2, 0 }, 
@@ -16,11 +12,21 @@ public class main {
 			{ 0, 0, 8, 0, 0, 0, 2, 0, 0 }, 
 			{ 5, 0, 0, 6, 0, 8, 0, 0, 1 } };
 	
+	/*static int sudoku[][] = { 
+			{ 7, 0, 1, 5, 2, 0, 3, 6, 4 }, 
+			{ 3, 5, 9, 1, 0, 4, 8, 2, 7 }, 
+			{ 6, 2, 4, 3, 8, 7, 5, 9, 0 }, 
+			{ 4, 1, 0, 8, 9, 6, 7, 0, 5 }, 
+			{ 0, 7, 3, 2, 4, 1, 6, 8, 9 }, 
+			{ 8, 9, 6, 7, 0, 3, 1, 4, 0 }, 
+			{ 9, 0, 8, 4, 0, 5, 2, 7, 6 }, 
+			{ 0, 4, 7, 6, 3, 2, 9, 5, 8 }, 
+			{ 2, 6, 5, 9, 7, 8, 4, 1, 0 } };*/
+	
 	public boolean checkValue(node Node, int content){
-		/*if(sudoku[Node.row][Node.col] != 0) {
-			System.out.println("Cell has already a value");
+		if(sudoku[Node.row][Node.col] != 0) {
 			return false;
-		}*/
+		}
 		
 		//Check  row
 		for (int r = 0; r < 9; r++) {
@@ -72,40 +78,48 @@ public class main {
 	}
 	
 	public boolean resolveSudoku(node Node){
+		
 		if(Node == null){
 			return true;
 		}
 		
 		//Check if the actual position has a value
-		if (sudoku[Node.row][Node.col] != 0){
-			this.getNextNode(Node);
+		node actual_cell = Node;
+		while(sudoku[actual_cell.row][actual_cell.col] != 0){
+			actual_cell = this.getNextNode(actual_cell);
+			if(actual_cell == null){
+				return true;
+			}
 		}
 		
 		int v = 1;
 		
 		while(v < 10){
-			boolean check = this.checkValue(Node, v);
+			boolean check = this.checkValue(actual_cell, v);
+			
 			if(!check){
 				v++;
-			}
-			sudoku[Node.row][Node.col] = v;
-			
-			node n_node = this.getNextNode(Node);
-			boolean next = this.resolveSudoku(n_node);
-			if(next){
-				return true;
 			}else{
-				sudoku[Node.row][Node.col]=0;
+				sudoku[actual_cell.row][actual_cell.col] = v;
+				//v++;
+				node n_node = this.getNextNode(actual_cell);
+				boolean next = this.resolveSudoku(n_node);
+				if(next){
+					return true;
+				}else{
+					sudoku[actual_cell.row][actual_cell.col]=0;
+				}
 			}
-			v++;
 			
 		}
+				
 		
 		return false;
 	}
-        
-    public static void main(String[] args) {
-        System.out.println("Real: ");
+	
+	//Main function
+	public static void main(String[] args) {
+		System.out.println("Real: ");
 		for (int row = 0; row < 9; row++) {
 			for (int col = 0; col < 9; col++){
 				System.out.print(sudoku[row][col]);
@@ -127,6 +141,5 @@ public class main {
 		}else{
 			System.out.println("The sudoku cannot be resolved");
 		}
-    }
-    
+	}
 }
