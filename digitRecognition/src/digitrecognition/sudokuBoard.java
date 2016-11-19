@@ -1,36 +1,38 @@
-package digitrecognition;
+package digitrecognition; 
+import javax.swing.*;
 /**
  *
- * @author anamariagonzalez
+ * @author gomit
  */
-public class sudokuBoard extends javax.swing.JFrame {
-    
+public class sudokuBoard extends JFrame{
+
     public sudokuBoard() {
         initComponents();
     }
-
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    
+                        
     private void initComponents() {
 
-        panel00 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        panel00 = new sudokuPanel();
+        jPanel2 = new sudokuPanel();
         drawPanel = new javax.swing.JPanel();
-        panel01 = new javax.swing.JPanel();
-        panel02 = new javax.swing.JPanel();
-        panel10 = new javax.swing.JPanel();
-        panel11 = new javax.swing.JPanel();
-        panel12 = new javax.swing.JPanel();
-        panel20 = new javax.swing.JPanel();
-        panel21 = new javax.swing.JPanel();
-        panel22 = new javax.swing.JPanel();
+        recognize = new javax.swing.JButton();
+        drawArea = new drawArea();
+        panel01 = new sudokuPanel();
+        panel02 = new sudokuPanel();
+        panel10 = new sudokuPanel();
+        panel11 = new sudokuPanel();
+        panel12 = new sudokuPanel();
+        panel20 = new sudokuPanel();
+        panel21 = new sudokuPanel();
+        panel22 = new sudokuPanel();
         optionsPanel = new javax.swing.JPanel();
         solveBtn = new javax.swing.JButton();
         cleanBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sudoku");
-        setName("board"); // NOI18N
+        setName("board"); 
 
         panel00.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
@@ -47,15 +49,44 @@ public class sudokuBoard extends javax.swing.JFrame {
 
         drawPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Draw a number", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 14), new java.awt.Color(51, 51, 51))); // NOI18N
 
+        recognize.setText("Recognize");
+        recognize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //recognize(evt);
+            }
+        });
+
+        drawArea.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout drawAreaLayout = new javax.swing.GroupLayout(drawArea);
+        drawArea.setLayout(drawAreaLayout);
+        drawAreaLayout.setHorizontalGroup(
+            drawAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        drawAreaLayout.setVerticalGroup(
+            drawAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 245, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout drawPanelLayout = new javax.swing.GroupLayout(drawPanel);
         drawPanel.setLayout(drawPanelLayout);
         drawPanelLayout.setHorizontalGroup(
             drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 223, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, drawPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(drawArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(recognize, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
+                .addContainerGap())
         );
         drawPanelLayout.setVerticalGroup(
             drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, drawPanelLayout.createSequentialGroup()
+                .addComponent(drawArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(recognize)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -183,8 +214,18 @@ public class sudokuBoard extends javax.swing.JFrame {
         optionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Options", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 14), new java.awt.Color(51, 51, 51))); // NOI18N
 
         solveBtn.setText("Solve");
-
+        solveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //recognize(evt);
+            }
+        });
+        
         cleanBtn.setText("Clean");
+        cleanBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //recognize(evt);
+            }
+        });
 
         javax.swing.GroupLayout optionsPanelLayout = new javax.swing.GroupLayout(optionsPanel);
         optionsPanel.setLayout(optionsPanelLayout);
@@ -204,7 +245,7 @@ public class sudokuBoard extends javax.swing.JFrame {
                 .addComponent(solveBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cleanBtn)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -273,53 +314,24 @@ public class sudokuBoard extends javax.swing.JFrame {
         panel00.getAccessibleContext().setAccessibleName("Panel1");
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    public static void main(String args[]) {
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(sudokuBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(sudokuBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(sudokuBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(sudokuBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new sudokuBoard().setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    }// </editor-fold>                        
+                       
+    // Variables declaration - do not modify                     
     private javax.swing.JButton cleanBtn;
     private javax.swing.JPanel drawPanel;
-    private javax.swing.JPanel jPanel2;
+    private drawArea drawArea;
+    private sudokuPanel jPanel2;
     private javax.swing.JPanel optionsPanel;
-    private javax.swing.JPanel panel00;
-    private javax.swing.JPanel panel01;
-    private javax.swing.JPanel panel02;
-    private javax.swing.JPanel panel10;
-    private javax.swing.JPanel panel11;
-    private javax.swing.JPanel panel12;
-    private javax.swing.JPanel panel20;
-    private javax.swing.JPanel panel21;
-    private javax.swing.JPanel panel22;
+    private sudokuPanel panel00;
+    private sudokuPanel panel01;
+    private sudokuPanel panel02;
+    private sudokuPanel panel10;
+    private sudokuPanel panel11;
+    private sudokuPanel panel12;
+    private sudokuPanel panel20;
+    private sudokuPanel panel21;
+    private sudokuPanel panel22;
+    private javax.swing.JButton recognize;
     private javax.swing.JButton solveBtn;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration
 }

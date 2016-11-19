@@ -1,6 +1,4 @@
 package digitrecognition;
-import static java.awt.Frame.MAXIMIZED_BOTH;
-
 /**
  *
  * @author anamariagonzalez
@@ -8,8 +6,7 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 public class DigitRecognition {
     
     public static void main(String[] args) {
-        sudokuBoard board = new sudokuBoard();
-        //board.setExtendedState(MAXIMIZED_BOTH); 
+        sudokuBoard board = new sudokuBoard(); 
         board.setVisible(true);
     }
     
