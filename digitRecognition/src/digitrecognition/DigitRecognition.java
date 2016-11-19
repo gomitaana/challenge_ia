@@ -9,7 +9,7 @@ public class DigitRecognition {
     
     public static void main(String[] args) {
         sudokuBoard board = new sudokuBoard();
-        board.setExtendedState(MAXIMIZED_BOTH); 
+        //board.setExtendedState(MAXIMIZED_BOTH); 
         board.setVisible(true);
     }
     
