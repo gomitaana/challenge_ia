@@ -13,24 +13,24 @@ import javax.swing.JPanel;
 public class drawArea extends JPanel implements MouseMotionListener, MouseListener{
     private int px, py;
     private boolean point,painting;
-    private boolean[][] data;
+    private boolean[][] points;
     
     	public drawArea() {
             point=painting=false;
             px = py = 0;
-            data = new boolean[280][280];
+            points = new boolean[280][280];
             addMouseListener(this);
             addMouseMotionListener(this);
 	}
 	
 	public void clear() {
-            data = new boolean[280][280];
+            points = new boolean[280][280];
             getGraphics().clearRect(0, 0, 280, 280);
-            setBackground(Color.WHITE);
+            setBackground(new java.awt.Color(255, 255, 255));
 	}
 
-	public boolean[][] getData() {
-		return data;
+	public boolean[][] getPoints() {
+		return points;
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -49,7 +49,7 @@ public class drawArea extends JPanel implements MouseMotionListener, MouseListen
 		}
 		px = x;
 		py = y;
-		if (painting) data[x][y] = true;
+		if (painting) points[x][y] = true;
 	}
 	
 	public void mouseExited(MouseEvent e) {

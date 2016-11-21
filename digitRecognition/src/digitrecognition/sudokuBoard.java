@@ -9,14 +9,13 @@ public class sudokuBoard extends JFrame{
     public sudokuBoard() {
         initComponents();
     }
-    
-                        
+                   
     private void initComponents() {
-
         panel00 = new sudokuPanel();
         jPanel2 = new sudokuPanel();
         drawPanel = new javax.swing.JPanel();
         recognize = new javax.swing.JButton();
+        image = new recognition();
         drawArea = new drawArea();
         panel01 = new sudokuPanel();
         panel02 = new sudokuPanel();
@@ -29,7 +28,8 @@ public class sudokuBoard extends JFrame{
         optionsPanel = new javax.swing.JPanel();
         solveBtn = new javax.swing.JButton();
         cleanBtn = new javax.swing.JButton();
-
+        cleanSudoku = new javax.swing.JButton();
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sudoku");
         setName("board"); 
@@ -47,12 +47,17 @@ public class sudokuBoard extends JFrame{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        drawPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Draw a number", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 14), new java.awt.Color(51, 51, 51))); // NOI18N
+        drawPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Draw a number", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 14), new java.awt.Color(51, 51, 51))); 
 
         recognize.setText("Recognize");
         recognize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //recognize(evt);
+                //Recognize event
+                System.out.println("Click Recognize");
+                boolean[][] points = drawArea.getPoints();
+                recognition image = new recognition();
+                image.setPoints(points);
+                image.setImage();
             }
         });
 
@@ -216,14 +221,21 @@ public class sudokuBoard extends JFrame{
         solveBtn.setText("Solve");
         solveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //recognize(evt);
+                //solve(evt);
             }
         });
         
         cleanBtn.setText("Clean");
         cleanBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //recognize(evt);
+                drawArea.clear();
+            }
+        });
+        
+        cleanSudoku.setText("Start Again");
+        cleanSudoku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
             }
         });
 
@@ -310,13 +322,10 @@ public class sudokuBoard extends JFrame{
                         .addComponent(optionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
-
         panel00.getAccessibleContext().setAccessibleName("Panel1");
-
         pack();
-    }// </editor-fold>                        
-                       
-    // Variables declaration - do not modify                     
+    }                      
+                   
     private javax.swing.JButton cleanBtn;
     private javax.swing.JPanel drawPanel;
     private drawArea drawArea;
@@ -333,5 +342,6 @@ public class sudokuBoard extends JFrame{
     private sudokuPanel panel22;
     private javax.swing.JButton recognize;
     private javax.swing.JButton solveBtn;
-    // End of variables declaration
+    private javax.swing.JButton cleanSudoku;
+    private recognition image;
 }
