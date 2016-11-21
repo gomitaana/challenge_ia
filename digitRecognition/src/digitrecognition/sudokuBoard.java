@@ -55,9 +55,9 @@ public class sudokuBoard extends JFrame{
                 //Recognize event
                 System.out.println("Click Recognize");
                 boolean[][] points = drawArea.getPoints();
-                recognition image = new recognition();
                 image.setPoints(points);
                 image.setImage();
+                int num = image.getNumber();
             }
         });
 

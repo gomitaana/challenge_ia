@@ -9,12 +9,14 @@ public class recognition {
     private BufferedImage image;
     private int[] drawAreaSize;
     private boolean[][] bits;
+    private int[] intBits;
 
     public recognition() {
        points = new boolean[280][280];
        image = new BufferedImage(280, 280, BufferedImage.TYPE_BYTE_BINARY);
        drawAreaSize = new int[] {280, 280, 0, 0};
-       boolean bits[][] = new boolean[10][10];
+       bits = new boolean[10][10];
+       intBits = new int[100];
     }
 
     public boolean[][] getPoints() {
@@ -24,7 +26,7 @@ public class recognition {
     public void setPoints(boolean[][] points) {
         this.points = points;
     }
-
+    /*Convert the drawing in bits*/
     public void setImage() {
         //Prepare the img
 	for (int i = 0; i < points.length; i++){
@@ -55,11 +57,14 @@ public class recognition {
         
         int w = drawAreaSize[2] - drawAreaSize[0];
 	int h = drawAreaSize[3] - drawAreaSize[1];
-	int x = -1, y = -1, dx = w/10, dy = h/10;
+        System.out.println("W: " + w + " H: "+ h);
+	int x, y;
+        int dx = w/10, dy = h/10;
 	if (dx == 0) 
             dx = 1;
 	if (dy == 0) 
             dy = 1;
+        y = x = -1;
 	for (int i = drawAreaSize[0]; i <= drawAreaSize[2]; i++) {
             if (x != 9 && (i - drawAreaSize[0]) % dx == 0) 
                 x++;
@@ -67,16 +72,21 @@ public class recognition {
             for (int j = drawAreaSize[1]; j <= drawAreaSize[3]; j++) {
                 if (y != 9 && (j - drawAreaSize[1]) % dy == 0)
                     y++;
-                    if (bits[x][y]) 
-                        continue;
+                if (bits[x][y]) continue;
 		bits[x][y] = points[i][j] || bits[x][y];
             }
         }
-        
     }
     
-    public void getNumber(){
-        
+    public int getNumber(){
+        //crete a matrix with bits
+	for (int i = 0; i < 10; i++){
+            for (int j = 0; j < 10; j++){
+                if(bits[i][j]) 
+                   System.out.println("["+i+"]["+j+"] = "+bits[i][j]);
+		intBits[10*j + i] = (bits[i][j])? 1 : 0;
+            }
+        }
+	return MultilayerNeuralNet.getResult(intBits);
     }
-
 }
