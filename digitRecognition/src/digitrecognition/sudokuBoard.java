@@ -87,7 +87,6 @@ public class sudokuBoard extends JFrame{
         //getContentPane().add(sudoku);
 
         drawing.setBorder(javax.swing.BorderFactory.createTitledBorder("Draw"));
-        //drawArea.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         drawArea.setMaximumSize(new java.awt.Dimension(270, 270));
         drawArea.setMinimumSize(new java.awt.Dimension(270, 270));
         drawArea.setPreferredSize(new java.awt.Dimension(270, 270));
@@ -106,12 +105,11 @@ public class sudokuBoard extends JFrame{
         recog.setText("Recognize");
         recog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //Recognize event
-                //System.out.println("Click Recognize");
                 boolean[][] points;
                 points = drawArea.getPoints();
                 image.setPoints(points);
                 image.setImage();
+                //image.printBits();
                 int num = image.getNumber();
                 drawArea.clear();
                 image.clear();

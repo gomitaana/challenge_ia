@@ -99,15 +99,25 @@ public class recognition {
     }
     
     public int getNumber(){
-        //crete a matrix with bits
+        //crete a matrix 10*10 with bits
 	for (int i = 0; i < 10; i++){
             for (int j = 0; j < 10; j++){
 		intBits[10*j + i] = (bits[i][j])? 1 : 0;
+                //System.out.print(intBits[j]);
             }
         }
-
         int num = neuralNet.getResult(intBits);
         System.out.println("Num: " + num);
         return num;
+    }
+    
+    public void printBits(){
+        for (int i = 0; i < 10; i++){
+            for (int j = 0; j < 10; j++){
+                if(bits[i][j]) {
+                    System.out.print("["+i+"]["+j+"] = "+bits[i][j]);
+                }
+            }
+        }
     }
 }

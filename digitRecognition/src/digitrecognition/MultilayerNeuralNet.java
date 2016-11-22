@@ -7,8 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MultilayerNeuralNet {
-
-    private double rate;
     private int input;
     private int layer;
     private int output;
@@ -19,9 +17,8 @@ public class MultilayerNeuralNet {
     private double[] outReults;
 
     public MultilayerNeuralNet() {
-        this.rate = 0.07;
 	this.input   = 101;
-	this.layer  = 26;
+	this.layer  = 36;
 	this.output  = 10;
 	this.weights1layer = new double[this.input][this.layer];
 	this.weight2layer = new double[this.layer][this.output];
@@ -94,12 +91,12 @@ public class MultilayerNeuralNet {
         }
 	for (int i = 0; i < input; i++){
             for (int j = 0; j < layer; j++){
-                weights1layer[i][j] += rate * auxj[j] * inputs[i];
+                weights1layer[i][j] += auxj[j] * inputs[i];
             }
         }
 	for (int j = 0; j < layer; j++){
             for (int k = 0; k < output; k++){
-                weight2layer[j][k] += rate * aux[k] * layersout[j];
+                weight2layer[j][k] +=  aux[k] * layersout[j];
             }
         }            
     }
@@ -141,7 +138,7 @@ public class MultilayerNeuralNet {
     }
     
     private void training(){
-        int total = 578;
+        int total = 500;
         int[][] trainPatterns= new int[total][100];
         int[] outcome = new int[total];
         String line;
