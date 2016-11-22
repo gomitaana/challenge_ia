@@ -130,7 +130,7 @@ public class solver {
 		return mNodes;
 	}
 	
-	public static void main(String[] args) {
+	public static void main() {
 		// this function is called just once, and it call the InitializeValues function for each node
 		//It initialize the matrix of nodes, and the array of nodes we will be iterating
 		

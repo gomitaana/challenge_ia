@@ -159,18 +159,19 @@ public class sudokuBoard extends JFrame{
         solve.setText("Solve");
         solve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //solve(evt);
+                solver solver = new solver();
+                solver.main();
             }
         });
 
-        clean.setText("Clean");
+        clean.setText("Train");
         clean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                
+                System.out.println("Train");
             }
         });
 
-        /*javax.swing.GroupLayout optionsLayout = new javax.swing.GroupLayout(options);
+        javax.swing.GroupLayout optionsLayout = new javax.swing.GroupLayout(options);
         options.setLayout(optionsLayout);
         optionsLayout.setHorizontalGroup(
             optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +192,7 @@ public class sudokuBoard extends JFrame{
                 .addContainerGap(308, Short.MAX_VALUE))
         );
 
-        getContentPane().add(options);*/
+        getContentPane().add(options);
 
         pack();
     }                      

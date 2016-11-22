@@ -39,6 +39,7 @@ public class recognition {
     public void setPoints(boolean[][] points) {
         this.points = points;
     }
+    
     /*Convert the drawing in bits*/
     public void setImage() {
         //Prepare the img
@@ -74,7 +75,7 @@ public class recognition {
         
         int w = drawAreaSize[2] - drawAreaSize[0];
 	int h = drawAreaSize[3] - drawAreaSize[1];
-        System.out.println("W: " + w + " H: "+ h);
+        //System.out.println("W: " + w + " H: "+ h);
 	int x, y;
         int dx = w/10, dy = h/10;
 	if (dx == 0) 

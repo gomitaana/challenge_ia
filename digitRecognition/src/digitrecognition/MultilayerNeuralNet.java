@@ -165,7 +165,7 @@ public class MultilayerNeuralNet {
                 }
             }
             trainFile.close();
-            train(trainPatterns,outcome,1000);
+            train(trainPatterns,outcome,2000);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MultilayerNeuralNet.class.getName()).log(Level.SEVERE, null, ex);
         }
