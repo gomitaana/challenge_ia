@@ -1,5 +1,8 @@
 package digitrecognition;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author gomit
@@ -10,6 +13,7 @@ public class recognition {
     private int[] drawAreaSize;
     private boolean[][] bits;
     private int[] intBits;
+    MultilayerNeuralNet neuralNet;
 
     public recognition() {
        points = new boolean[280][280];
@@ -17,6 +21,7 @@ public class recognition {
        drawAreaSize = new int[] {280, 280, 0, 0};
        bits = new boolean[10][10];
        intBits = new int[100];
+       neuralNet = new MultilayerNeuralNet();
     }
 
     public boolean[][] getPoints() {
@@ -87,6 +92,9 @@ public class recognition {
 		intBits[10*j + i] = (bits[i][j])? 1 : 0;
             }
         }
-	return MultilayerNeuralNet.getResult(intBits);
+
+        int num = neuralNet.getResult(intBits);
+        System.out.println("Num: " + num);
+        return num;
     }
 }

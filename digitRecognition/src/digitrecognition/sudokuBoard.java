@@ -7,341 +7,211 @@ import javax.swing.*;
 public class sudokuBoard extends JFrame{
 
     public sudokuBoard() {
+        setResizable(false);
         initComponents();
     }
                    
     private void initComponents() {
-        panel00 = new sudokuPanel();
-        jPanel2 = new sudokuPanel();
-        drawPanel = new javax.swing.JPanel();
-        recognize = new javax.swing.JButton();
-        image = new recognition();
+        sudoku = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        drawing = new javax.swing.JPanel();
+        options = new javax.swing.JPanel();
         drawArea = new drawArea();
-        panel01 = new sudokuPanel();
-        panel02 = new sudokuPanel();
-        panel10 = new sudokuPanel();
-        panel11 = new sudokuPanel();
-        panel12 = new sudokuPanel();
-        panel20 = new sudokuPanel();
-        panel21 = new sudokuPanel();
-        panel22 = new sudokuPanel();
-        optionsPanel = new javax.swing.JPanel();
-        solveBtn = new javax.swing.JButton();
-        cleanBtn = new javax.swing.JButton();
-        cleanSudoku = new javax.swing.JButton();
+        recog = new javax.swing.JButton();
+        cleanDraw = new javax.swing.JButton();
+        solve = new javax.swing.JButton();
+        clean = new javax.swing.JButton();
+        image = new recognition();
         
+        P1 = new sudokuPanel();
+        P2 = new sudokuPanel();
+        P3 = new sudokuPanel();
+        P4 = new sudokuPanel();
+        P5 = new sudokuPanel();
+        P6 = new sudokuPanel();
+        P7 = new sudokuPanel();
+        P8 = new sudokuPanel();
+        P9 = new sudokuPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sudoku");
-        setName("board"); 
+        getContentPane().setLayout(new java.awt.GridLayout());
 
-        panel00.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        sudoku.setBorder(javax.swing.BorderFactory.createTitledBorder("Sudoku"));
 
-        javax.swing.GroupLayout panel00Layout = new javax.swing.GroupLayout(panel00);
-        panel00.setLayout(panel00Layout);
-        panel00Layout.setHorizontalGroup(
-            panel00Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setLayout(new java.awt.GridLayout(3, 3));
+
+        P1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(P1);
+
+        P2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(P2);
+
+        P3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(P3);
+
+        P4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(P4);
+
+        P5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(P5);
+
+        P6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(P6);
+
+        P7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(P7);
+
+        P8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(P8);
+
+        P9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(P9);
+
+        javax.swing.GroupLayout sudokuLayout = new javax.swing.GroupLayout(sudoku);
+        sudoku.setLayout(sudokuLayout);
+        sudokuLayout.setHorizontalGroup(
+            sudokuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sudokuLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 21, Short.MAX_VALUE))
         );
-        panel00Layout.setVerticalGroup(
-            panel00Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        sudokuLayout.setVerticalGroup(
+            sudokuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sudokuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        drawPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Draw a number", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 14), new java.awt.Color(51, 51, 51))); 
+        getContentPane().add(sudoku);
 
-        recognize.setText("Recognize");
-        recognize.addActionListener(new java.awt.event.ActionListener() {
+        drawing.setBorder(javax.swing.BorderFactory.createTitledBorder("Draw"));
+        //drawArea.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        drawArea.setMaximumSize(new java.awt.Dimension(270, 270));
+        drawArea.setMinimumSize(new java.awt.Dimension(270, 270));
+        drawArea.setPreferredSize(new java.awt.Dimension(270, 270));
+
+        javax.swing.GroupLayout jPaneldrawLayout = new javax.swing.GroupLayout(drawArea);
+        drawArea.setLayout(jPaneldrawLayout);
+        jPaneldrawLayout.setHorizontalGroup(
+            jPaneldrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPaneldrawLayout.setVerticalGroup(
+            jPaneldrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 270, Short.MAX_VALUE)
+        );
+
+        recog.setText("Recognize");
+        recog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //Recognize event
                 System.out.println("Click Recognize");
-                boolean[][] points = drawArea.getPoints();
+                boolean[][] points;
+                points = drawArea.getPoints();
                 image.setPoints(points);
                 image.setImage();
                 int num = image.getNumber();
+                drawArea.clear();
             }
         });
 
-        drawArea.setBackground(new java.awt.Color(255, 255, 255));
+        cleanDraw.setText("Clean");
+        cleanDraw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                drawArea.clear();
+                
+            }
+        });
 
-        javax.swing.GroupLayout drawAreaLayout = new javax.swing.GroupLayout(drawArea);
-        drawArea.setLayout(drawAreaLayout);
-        drawAreaLayout.setHorizontalGroup(
-            drawAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        drawAreaLayout.setVerticalGroup(
-            drawAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 245, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout drawPanelLayout = new javax.swing.GroupLayout(drawPanel);
-        drawPanel.setLayout(drawPanelLayout);
-        drawPanelLayout.setHorizontalGroup(
-            drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, drawPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout drawingLayout = new javax.swing.GroupLayout(drawing);
+        drawing.setLayout(drawingLayout);
+        drawingLayout.setHorizontalGroup(
+            drawingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(drawingLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(drawArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(recognize, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
+                .addGroup(drawingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(drawArea, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                    .addGroup(drawingLayout.createSequentialGroup()
+                        .addGroup(drawingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(recog, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                            .addComponent(cleanDraw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 55, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        drawPanelLayout.setVerticalGroup(
-            drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, drawPanelLayout.createSequentialGroup()
-                .addComponent(drawArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        drawingLayout.setVerticalGroup(
+            drawingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(drawingLayout.createSequentialGroup()
+                .addComponent(drawArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(recog)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(recognize)
-                .addContainerGap())
+                .addComponent(cleanDraw)
+                .addGap(0, 26, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(drawPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addComponent(drawPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-        );
+        getContentPane().add(drawing);
 
-        panel01.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        panel01.setForeground(new java.awt.Color(102, 102, 102));
+        options.setBorder(javax.swing.BorderFactory.createTitledBorder("Options"));
 
-        javax.swing.GroupLayout panel01Layout = new javax.swing.GroupLayout(panel01);
-        panel01.setLayout(panel01Layout);
-        panel01Layout.setHorizontalGroup(
-            panel01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        panel01Layout.setVerticalGroup(
-            panel01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        panel02.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-
-        javax.swing.GroupLayout panel02Layout = new javax.swing.GroupLayout(panel02);
-        panel02.setLayout(panel02Layout);
-        panel02Layout.setHorizontalGroup(
-            panel02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        panel02Layout.setVerticalGroup(
-            panel02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        panel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-
-        javax.swing.GroupLayout panel10Layout = new javax.swing.GroupLayout(panel10);
-        panel10.setLayout(panel10Layout);
-        panel10Layout.setHorizontalGroup(
-            panel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        panel10Layout.setVerticalGroup(
-            panel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        panel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-
-        javax.swing.GroupLayout panel11Layout = new javax.swing.GroupLayout(panel11);
-        panel11.setLayout(panel11Layout);
-        panel11Layout.setHorizontalGroup(
-            panel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        panel11Layout.setVerticalGroup(
-            panel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        panel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-
-        javax.swing.GroupLayout panel12Layout = new javax.swing.GroupLayout(panel12);
-        panel12.setLayout(panel12Layout);
-        panel12Layout.setHorizontalGroup(
-            panel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        panel12Layout.setVerticalGroup(
-            panel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        panel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-
-        javax.swing.GroupLayout panel20Layout = new javax.swing.GroupLayout(panel20);
-        panel20.setLayout(panel20Layout);
-        panel20Layout.setHorizontalGroup(
-            panel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        panel20Layout.setVerticalGroup(
-            panel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        panel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-
-        javax.swing.GroupLayout panel21Layout = new javax.swing.GroupLayout(panel21);
-        panel21.setLayout(panel21Layout);
-        panel21Layout.setHorizontalGroup(
-            panel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        panel21Layout.setVerticalGroup(
-            panel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        panel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-
-        javax.swing.GroupLayout panel22Layout = new javax.swing.GroupLayout(panel22);
-        panel22.setLayout(panel22Layout);
-        panel22Layout.setHorizontalGroup(
-            panel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        panel22Layout.setVerticalGroup(
-            panel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        optionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Options", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 14), new java.awt.Color(51, 51, 51))); // NOI18N
-
-        solveBtn.setText("Solve");
-        solveBtn.addActionListener(new java.awt.event.ActionListener() {
+        solve.setText("Solve");
+        solve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //solve(evt);
             }
         });
-        
-        cleanBtn.setText("Clean");
-        cleanBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                drawArea.clear();
-            }
-        });
-        
-        cleanSudoku.setText("Start Again");
-        cleanSudoku.addActionListener(new java.awt.event.ActionListener() {
+
+        clean.setText("Clean");
+        clean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 
             }
         });
 
-        javax.swing.GroupLayout optionsPanelLayout = new javax.swing.GroupLayout(optionsPanel);
-        optionsPanel.setLayout(optionsPanelLayout);
-        optionsPanelLayout.setHorizontalGroup(
-            optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(optionsPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout optionsLayout = new javax.swing.GroupLayout(options);
+        options.setLayout(optionsLayout);
+        optionsLayout.setHorizontalGroup(
+            optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(optionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(solveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cleanBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(solve, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                    .addComponent(clean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
-        optionsPanelLayout.setVerticalGroup(
-            optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(optionsPanelLayout.createSequentialGroup()
+        optionsLayout.setVerticalGroup(
+            optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(optionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(solveBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cleanBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(solve)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(clean)
+                .addContainerGap(308, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panel00, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(panel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(panel01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(panel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(panel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panel02, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(optionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(panel01, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(panel02, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(panel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(panel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(panel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(panel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(panel00, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(panel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(panel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(optionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(93, Short.MAX_VALUE))
-        );
-        panel00.getAccessibleContext().setAccessibleName("Panel1");
+        getContentPane().add(options);
+
         pack();
     }                      
                    
-    private javax.swing.JButton cleanBtn;
-    private javax.swing.JPanel drawPanel;
+    private sudokuPanel P1;
+    private sudokuPanel P2;
+    private sudokuPanel P3;
+    private sudokuPanel P4;
+    private sudokuPanel P5;
+    private sudokuPanel P6;
+    private sudokuPanel P7;
+    private sudokuPanel P8;
+    private sudokuPanel P9;
+    private javax.swing.JButton clean;
+    private javax.swing.JButton cleanDraw;
+    private javax.swing.JPanel drawing;
+    private javax.swing.JPanel jPanel1;
     private drawArea drawArea;
-    private sudokuPanel jPanel2;
-    private javax.swing.JPanel optionsPanel;
-    private sudokuPanel panel00;
-    private sudokuPanel panel01;
-    private sudokuPanel panel02;
-    private sudokuPanel panel10;
-    private sudokuPanel panel11;
-    private sudokuPanel panel12;
-    private sudokuPanel panel20;
-    private sudokuPanel panel21;
-    private sudokuPanel panel22;
-    private javax.swing.JButton recognize;
-    private javax.swing.JButton solveBtn;
-    private javax.swing.JButton cleanSudoku;
+    private javax.swing.JPanel options;
+    private javax.swing.JButton recog;
+    private javax.swing.JButton solve;
+    private javax.swing.JPanel sudoku;
     private recognition image;
 }

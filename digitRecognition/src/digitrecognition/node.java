@@ -4,7 +4,6 @@ package digitrecognition;
  * @author Raul
  */
 import java.util.*;
-import java.util.stream.*;
 
 public class node implements Comparable<node> {
 	//Dimensions of the node
@@ -42,9 +41,12 @@ public class node implements Comparable<node> {
 		}
 		
 		//check if it has possible values
-		boolean contains = IntStream.of(this.values).anyMatch(x -> x == 0);
-		
-		return contains;
+		for(int i =0; i<this.values.length; i++){
+			if(this.values[i] == 0){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void resetValues(){

@@ -26,7 +26,7 @@ public class drawArea extends JPanel implements MouseMotionListener, MouseListen
 	public void clear() {
             points = new boolean[280][280];
             getGraphics().clearRect(0, 0, 280, 280);
-            setBackground(new java.awt.Color(255, 255, 255));
+            
 	}
 
 	public boolean[][] getPoints() {
