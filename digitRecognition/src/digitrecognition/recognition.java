@@ -40,14 +40,18 @@ public class recognition {
 		this.image.setRGB(i, j, color);
                 if (points[i][j]) {
                     //System.out.println("Points ["+i+"]["+j+"] => " + points[i][j]);
-                    if (i < drawAreaSize[0]) 
+                    if (i < drawAreaSize[0]){
                         drawAreaSize[0] = i;
-                    if (j < drawAreaSize[1]) 
+                    }
+                    if (j < drawAreaSize[1]){
                         drawAreaSize[1] = j;
-                    if (i > drawAreaSize[2]) 
+                    } 
+                    if (i > drawAreaSize[2]){
                         drawAreaSize[2] = i;
-                    if (j > drawAreaSize[3]) 
+                    } 
+                    if (j > drawAreaSize[3]){
                         drawAreaSize[3] = j;
+                    } 
 		}
             }
         }
@@ -71,12 +75,14 @@ public class recognition {
             dy = 1;
         y = x = -1;
 	for (int i = drawAreaSize[0]; i <= drawAreaSize[2]; i++) {
-            if (x != 9 && (i - drawAreaSize[0]) % dx == 0) 
+            if (x != 9 && (i - drawAreaSize[0]) % dx == 0){
                 x++;
+            } 
             y = -1;
             for (int j = drawAreaSize[1]; j <= drawAreaSize[3]; j++) {
-                if (y != 9 && (j - drawAreaSize[1]) % dy == 0)
+                if (y != 9 && (j - drawAreaSize[1]) % dy == 0){
                     y++;
+                }
                 if (bits[x][y]) continue;
 		bits[x][y] = points[i][j] || bits[x][y];
             }
@@ -87,8 +93,9 @@ public class recognition {
         //crete a matrix with bits
 	for (int i = 0; i < 10; i++){
             for (int j = 0; j < 10; j++){
-                if(bits[i][j]) 
-                   System.out.println("["+i+"]["+j+"] = "+bits[i][j]);
+                if(bits[i][j]) {
+                    System.out.println("["+i+"]["+j+"] = "+bits[i][j]);
+                }
 		intBits[10*j + i] = (bits[i][j])? 1 : 0;
             }
         }

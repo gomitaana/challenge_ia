@@ -38,17 +38,25 @@ public class MultilayerNeuralNet {
 
     private void getWeights() {
         double min = -1.0, max = 1.0;
-        for (int i = 0; i < input; i++)
-            for (int j = 0; j < layer; j++)
-		weights1layer[i][j] = min + (max - min) * Math.random();
-        for (int j = 0; j < layer; j++)
-		for (int k = 0; k < output; k++)
-                    weight2layer[j][k] = min + (max - min) * Math.random();  
+        for (int i = 0; i < input; i++){
+            for (int j = 0; j < layer; j++){
+                weights1layer[i][j] = min + (max - min) * Math.random();
+            }
+        }
+            
+        for (int j = 0; j < layer; j++){
+            for (int k = 0; k < output; k++){
+                weight2layer[j][k] = min + (max - min) * Math.random(); 
+            }
+        }
+		 
     }
     
     private void forwardPropagation(int[] inputs) {
-        for (int i = 0; i < input - 1; i++)
+        for (int i = 0; i < input - 1; i++){
             this.inputs[i] = inputs[i];
+        }
+        
         for (int j = 0; j < layer - 1; j++) {
             ah[j] = 0.0;
             for (int i = 0; i < input; i++)
@@ -57,37 +65,47 @@ public class MultilayerNeuralNet {
 	}
 	for (int k = 0; k < output; k++) {
             ao[k] = 0.0;
-            for (int j = 0; j < layer; j++)
-		ao[k] += ah[j] * weight2layer[j][k];
+            for (int j = 0; j < layer; j++){
+                ao[k] += ah[j] * weight2layer[j][k];
+            }
             ao[k] = activationFunction(ao[k],0);
 	}
 }
     
     private void backPropagation(double[] errors) {
 	double[] deltak = new double[output];
-	for (int k = 0; k < output; k++)
+	for (int k = 0; k < output; k++){
             deltak[k] = activationFunction(ao[k],1) * errors[k];
+        } 
 	double[] deltaj = new double[layer];
-	for (int j = 0; j < layer; j++)
-            for (int k = 0; k < output; k++)
-		deltaj[j] += activationFunction(ah[j],1) * deltak[k] * weight2layer[j][k];
-	for (int i = 0; i < input; i++)
-            for (int j = 0; j < layer; j++)
-		weights1layer[i][j] += rate * deltaj[j] * inputs[i];
-	for (int j = 0; j < layer; j++)
-            for (int k = 0; k < output; k++)
-            weight2layer[j][k] += rate * deltak[k] * ah[j];
+	for (int j = 0; j < layer; j++){
+            for (int k = 0; k < output; k++){
+                deltaj[j] += activationFunction(ah[j],1) * deltak[k] * weight2layer[j][k];
+            }
+        }
+	for (int i = 0; i < input; i++){
+            for (int j = 0; j < layer; j++){
+                weights1layer[i][j] += rate * deltaj[j] * inputs[i];
+            }
+        }
+	for (int j = 0; j < layer; j++){
+            for (int k = 0; k < output; k++){
+                weight2layer[j][k] += rate * deltak[k] * ah[j];
+            }
+        }            
     }
     
     private double activationFunction(double x,int op) {
-        if(op==0)
+        if(op==0){
             return Math.tanh(x);
-        else
+        }else{
             return 1 - x*x;
+        }
+            
     }
         
     public void train(int[][] inputs, int[][] outputs, int iterLimit) {
-	for (int i = 0; i < iterLimit; i++)
+	for (int i = 0; i < iterLimit; i++){
             for (int j = 0; j < inputs.length; j++) {
 		forwardPropagation(inputs[j]);
                 double[] errors = new double[output];
@@ -95,16 +113,19 @@ public class MultilayerNeuralNet {
                     errors[k] = outputs[j][k] - ao[k];
                         backPropagation(errors);
             }
+        }
     }
     
     private int getResult() {
 	if (output == 1) return (ao[0] < 0.5)? 0 : 1;
         int index = 0;
         double max = ao[0];
-	for (int k = 1; k < output; k++)
+	for (int k = 1; k < output; k++){
             if (ao[k] > max) {
 		max = ao[k]; index = k;
-	}
+            }
+        }
+            
 	return index;
     }
 }
