@@ -155,10 +155,10 @@ public class MultilayerNeuralNet {
                    for(int j=0;j<100;j++){
                      trainPatterns[i][j]= inputStr[j]; 
                    }
-                   outcome[i]=line.charAt(100);
+                   outcome[i]=Integer.parseInt(Character.toString(line.charAt(100)));
                     System.out.println("outcome " + outcome[i]);
+                    i++;
                 }
-                i++;
             }
             trainFile.close();
         } catch (FileNotFoundException ex) {
