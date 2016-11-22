@@ -151,7 +151,7 @@ public class MultilayerNeuralNet {
                      trainPatterns[i][j]= inputStr[j]; 
                    }
                    outcome[i]=Integer.parseInt(Character.toString(line.charAt(100)));
-                    //System.out.println("outcome " + outcome[i]);
+                    System.out.println("outcome " + outcome[i]);
                     i++;
                 }
             }
