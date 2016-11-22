@@ -160,7 +160,7 @@ public class sudokuBoard extends JFrame{
         solve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 solver solver = new solver();
-                solver.main();
+                //solver.main();
             }
         });
 
