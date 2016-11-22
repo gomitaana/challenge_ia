@@ -137,12 +137,28 @@ public class MultilayerNeuralNet {
     }
     
     private void training(){
+        int[][] trainPatterns= new int[63][100];
+        int[] outcome = new int[63];
+        String line;
+        char[] inputStr = new char[100];
+        int i = 0;
+        
         try {
             File here = new File("train_digits.txt");
             System.out.println(here.getAbsolutePath());
             Scanner trainFile = new Scanner(here);
             while (trainFile.hasNextLine()) {
-                System.out.println(trainFile.nextLine());
+                line = trainFile.nextLine();  
+                //System.out.println("len: "+line.length());
+                if(line.length()!=0){
+                   line.getChars(0, 100, inputStr, 0);
+                   for(int j=0;j<100;j++){
+                     trainPatterns[i][j]= inputStr[j]; 
+                   }
+                   outcome[i]=line.charAt(100);
+                    System.out.println("outcome " + outcome[i]);
+                }
+                i++;
             }
             trainFile.close();
         } catch (FileNotFoundException ex) {
