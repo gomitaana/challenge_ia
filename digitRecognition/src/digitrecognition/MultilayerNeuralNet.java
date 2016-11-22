@@ -1,5 +1,11 @@
 package digitrecognition;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class MultilayerNeuralNet {
 
     private double rate;
@@ -27,6 +33,7 @@ public class MultilayerNeuralNet {
 	ah[this.layer - 1]   = 1.0;
 	inputs[this.input  - 1]   = 1.0;
 	getWeights();
+        training();
         //train();
     }
     
@@ -106,5 +113,19 @@ public class MultilayerNeuralNet {
 		max = ao[k]; index = k;
 	}
 	return index;
+    }
+    
+    private void training(){
+        try {
+            File here = new File("train_digits.txt");
+            System.out.println(here.getAbsolutePath());
+            Scanner trainFile = new Scanner(here);
+            while (trainFile.hasNext()) {
+                System.out.println(trainFile.next());
+            }
+            trainFile.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MultilayerNeuralNet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
