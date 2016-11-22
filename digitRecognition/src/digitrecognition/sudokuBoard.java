@@ -68,7 +68,7 @@ public class sudokuBoard extends JFrame{
         P9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.add(P9);
 
-        javax.swing.GroupLayout sudokuLayout = new javax.swing.GroupLayout(sudoku);
+        /*javax.swing.GroupLayout sudokuLayout = new javax.swing.GroupLayout(sudoku);
         sudoku.setLayout(sudokuLayout);
         sudokuLayout.setHorizontalGroup(
             sudokuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,9 +82,9 @@ public class sudokuBoard extends JFrame{
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        );*/
 
-        getContentPane().add(sudoku);
+        //getContentPane().add(sudoku);
 
         drawing.setBorder(javax.swing.BorderFactory.createTitledBorder("Draw"));
         //drawArea.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -107,13 +107,14 @@ public class sudokuBoard extends JFrame{
         recog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //Recognize event
-                System.out.println("Click Recognize");
+                //System.out.println("Click Recognize");
                 boolean[][] points;
                 points = drawArea.getPoints();
                 image.setPoints(points);
                 image.setImage();
                 int num = image.getNumber();
                 drawArea.clear();
+                image.clear();
             }
         });
 
@@ -169,7 +170,7 @@ public class sudokuBoard extends JFrame{
             }
         });
 
-        javax.swing.GroupLayout optionsLayout = new javax.swing.GroupLayout(options);
+        /*javax.swing.GroupLayout optionsLayout = new javax.swing.GroupLayout(options);
         options.setLayout(optionsLayout);
         optionsLayout.setHorizontalGroup(
             optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,7 +191,7 @@ public class sudokuBoard extends JFrame{
                 .addContainerGap(308, Short.MAX_VALUE))
         );
 
-        getContentPane().add(options);
+        getContentPane().add(options);*/
 
         pack();
     }                      

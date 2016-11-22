@@ -23,6 +23,14 @@ public class recognition {
        intBits = new int[100];
        neuralNet = new MultilayerNeuralNet();
     }
+    
+    public void clear(){
+       points = new boolean[280][280];
+       image = new BufferedImage(280, 280, BufferedImage.TYPE_BYTE_BINARY);
+       drawAreaSize = new int[] {280, 280, 0, 0};
+       bits = new boolean[10][10];
+       intBits = new int[100];
+    }
 
     public boolean[][] getPoints() {
         return points;
@@ -93,9 +101,6 @@ public class recognition {
         //crete a matrix with bits
 	for (int i = 0; i < 10; i++){
             for (int j = 0; j < 10; j++){
-                if(bits[i][j]) {
-                    System.out.println("["+i+"]["+j+"] = "+bits[i][j]);
-                }
 		intBits[10*j + i] = (bits[i][j])? 1 : 0;
             }
         }
