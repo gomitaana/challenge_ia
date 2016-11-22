@@ -14,11 +14,9 @@ public class MultilayerNeuralNet {
     private int output;
     private double[][] weights1layer;
     private double[][] weight2layer;
-    
     private double[] inputs;
-    private double[] ah;
-    private double[] ao;
-    private int iters;
+    private double[] layersout;
+    private double[] outReults;
 
     public MultilayerNeuralNet() {
         this.rate = 0.70;
@@ -28,19 +26,26 @@ public class MultilayerNeuralNet {
 	this.weights1layer = new double[this.input][this.layer];
 	this.weight2layer = new double[this.layer][this.output];
 	this.inputs 		 = new double[this.input];
-	this.ah 		 = new double[this.layer];
-	this.ao 		 = new double[this.output];
-	ah[this.layer - 1]   = 1.0;
+	this.layersout 		 = new double[this.layer];
+	this.outReults 		 = new double[this.output];
+	layersout[this.layer - 1]   = 1.0;
 	inputs[this.input  - 1]   = 1.0;
 	getWeights();
         training();
-        //train();
     }
     
     public int getResult(int[] intBits) {
         System.out.println("Valor: ");
         forwardPropagation(intBits);
-        return getResult();
+        if (output == 1) return (outReults[0] < 0.5)? 0 : 1;
+        int index = 0;
+        double max = outReults[0];
+	for (int k = 1; k < output; k++){
+            if (outReults[k] > max) {
+		max = outReults[k]; index = k;
+            }
+        }   
+	return index;
     }
 
     private void getWeights() {
@@ -65,29 +70,29 @@ public class MultilayerNeuralNet {
         }
         
         for (int j = 0; j < layer - 1; j++) {
-            ah[j] = 0.0;
+            layersout[j] = 0.0;
             for (int i = 0; i < input; i++)
-                ah[j] += weights1layer[i][j] * this.inputs[i];
-                    ah[j] = activationFunction(ah[j],0);
+                layersout[j] += weights1layer[i][j] * this.inputs[i];
+                    layersout[j] = activationFunction(layersout[j],0);
 	}
 	for (int k = 0; k < output; k++) {
-            ao[k] = 0.0;
+            outReults[k] = 0.0;
             for (int j = 0; j < layer; j++){
-                ao[k] += ah[j] * weight2layer[j][k];
+                outReults[k] += layersout[j] * weight2layer[j][k];
             }
-            ao[k] = activationFunction(ao[k],0);
+            outReults[k] = activationFunction(outReults[k],0);
 	}
 }
     
     private void backPropagation(double[] errors) {
 	double[] deltak = new double[output];
 	for (int k = 0; k < output; k++){
-            deltak[k] = activationFunction(ao[k],1) * errors[k];
+            deltak[k] = activationFunction(outReults[k],1) * errors[k];
         } 
 	double[] deltaj = new double[layer];
 	for (int j = 0; j < layer; j++){
             for (int k = 0; k < output; k++){
-                deltaj[j] += activationFunction(ah[j],1) * deltak[k] * weight2layer[j][k];
+                deltaj[j] += activationFunction(layersout[j],1) * deltak[k] * weight2layer[j][k];
             }
         }
 	for (int i = 0; i < input; i++){
@@ -97,7 +102,7 @@ public class MultilayerNeuralNet {
         }
 	for (int j = 0; j < layer; j++){
             for (int k = 0; k < output; k++){
-                weight2layer[j][k] += rate * deltak[k] * ah[j];
+                weight2layer[j][k] += rate * deltak[k] * layersout[j];
             }
         }            
     }
@@ -108,32 +113,22 @@ public class MultilayerNeuralNet {
         }else{
             return 1 - x*x;
         }
-            
     }
         
-    public void train(int[][] inputs, int[][] outputs, int iterLimit) {
-	for (int i = 0; i < iterLimit; i++){
+    public void train(int[][] inputs, int[] outputs, int max) {
+        String [] aux= new String[8];
+	while(max>0){
             for (int j = 0; j < inputs.length; j++) {
 		forwardPropagation(inputs[j]);
                 double[] errors = new double[output];
-                for (int k = 0; k < output; k++)
-                    errors[k] = outputs[j][k] - ao[k];
-                        backPropagation(errors);
+                for (int k = 0; k < output; k++){
+                    System.out.println(Integer.toBinaryString(outputs[j]));
+                    //errors[k] = aux - outReults[k];
+                }
+                //backPropagation(errors);
             }
+            max--;
         }
-    }
-    
-    private int getResult() {
-	if (output == 1) return (ao[0] < 0.5)? 0 : 1;
-        int index = 0;
-        double max = ao[0];
-	for (int k = 1; k < output; k++){
-            if (ao[k] > max) {
-		max = ao[k]; index = k;
-            }
-        }
-            
-	return index;
     }
     
     private void training(){
@@ -145,7 +140,7 @@ public class MultilayerNeuralNet {
         
         try {
             File here = new File("train_digits.txt");
-            System.out.println(here.getAbsolutePath());
+            //System.out.println(here.getAbsolutePath());
             Scanner trainFile = new Scanner(here);
             while (trainFile.hasNextLine()) {
                 line = trainFile.nextLine();  
@@ -155,12 +150,13 @@ public class MultilayerNeuralNet {
                    for(int j=0;j<100;j++){
                      trainPatterns[i][j]= inputStr[j]; 
                    }
-                   outcome[i]=line.charAt(100);
-                    System.out.println("outcome " + outcome[i]);
+                   outcome[i]=Integer.parseInt(Character.toString(line.charAt(100)));
+                    //System.out.println("outcome " + outcome[i]);
+                    i++;
                 }
-                i++;
             }
             trainFile.close();
+            train(trainPatterns,outcome,1000);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MultilayerNeuralNet.class.getName()).log(Level.SEVERE, null, ex);
         }
