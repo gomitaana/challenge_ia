@@ -141,8 +141,8 @@ public class MultilayerNeuralNet {
             File here = new File("train_digits.txt");
             System.out.println(here.getAbsolutePath());
             Scanner trainFile = new Scanner(here);
-            while (trainFile.hasNext()) {
-                System.out.println(trainFile.next());
+            while (trainFile.hasNextLine()) {
+                System.out.println(trainFile.nextLine());
             }
             trainFile.close();
         } catch (FileNotFoundException ex) {
