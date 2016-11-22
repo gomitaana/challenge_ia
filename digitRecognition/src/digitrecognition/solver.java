@@ -4,10 +4,11 @@ package digitrecognition;
  *
  * @author Raul
  */
+
 import java.util.*;
 
 public class solver {
-	static int sudoku[][] = { 
+	/*static int sudoku[][] = { 
 			{ 2, 0, 0, 8, 0, 4, 0, 0, 6 }, 
 			{ 0, 0, 6, 0, 0, 0, 5, 0, 0 }, 
 			{ 0, 7, 4, 0, 0, 0, 9, 2, 0 }, 
@@ -16,7 +17,51 @@ public class solver {
 			{ 4, 0, 0, 0, 6, 0, 0, 0, 9 }, 
 			{ 0, 1, 9, 0, 0, 0, 7, 4, 0 }, 
 			{ 0, 0, 8, 0, 0, 0, 2, 0, 0 }, 
-			{ 5, 0, 0, 6, 0, 8, 0, 0, 1 } };
+			{ 5, 0, 0, 6, 0, 8, 0, 0, 1 } };*/
+	
+	/*static int sudoku[][] = { 
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+			{ 0, 0, 0, 1, 6, 4, 8, 2, 7 }, 
+			{ 0, 0, 0, 3, 8, 7, 5, 9, 1 }, 
+			{ 4, 1, 2, 8, 9, 6, 7, 3, 5 }, 
+			{ 5, 7, 3, 2, 4, 1, 6, 8, 9 }, 
+			{ 8, 9, 6, 7, 5, 3, 1, 4, 2 }, 
+			{ 9, 3, 8, 4, 1, 5, 2, 7, 6 }, 
+			{ 1, 4, 7, 6, 3, 2, 9, 5, 8 }, 
+			{ 2, 6, 5, 9, 7, 8, 4, 1, 3 } };*/
+			
+	/*static int sudoku[][] = { 
+			{ 0, 0, 1, 6, 3, 0, 0, 9, 0 }, 
+			{ 9, 0, 0, 0, 0, 0, 4, 0, 0 }, 
+			{ 0, 0, 0, 0, 0, 0, 8, 1, 0 }, 
+			{ 0, 0, 8, 0, 0, 2, 3, 6, 0 }, 
+			{ 0, 0, 0, 0, 0, 6, 0, 0, 0 }, 
+			{ 0, 2, 5, 8, 0, 0, 0, 0, 0 }, 
+			{ 2, 0, 0, 0, 9, 7, 0, 4, 0 }, 
+			{ 0, 4, 9, 0, 0, 0, 5, 0, 0 }, 
+			{ 0, 0, 0, 0, 0, 8, 0, 0, 0 } };*/
+	
+	static int sudoku[][] = { 
+			{ 7, 0, 1, 0, 2, 5, 0, 4, 0 }, 
+			{ 0, 0, 5, 6, 1, 0, 2, 0, 0 }, 
+			{ 6, 0, 0, 0, 9, 0, 0, 0, 0 }, 
+			{ 0, 7, 0, 0, 0, 0, 0, 0, 0 }, 
+			{ 0, 0, 2, 0, 0, 0, 0, 3, 0 }, 
+			{ 0, 0, 0, 0, 0, 8, 0, 0, 0 }, 
+			{ 0, 0, 7, 0, 0, 0, 3, 9, 0 }, 
+			{ 1, 0, 0, 9, 5, 0, 0, 0, 4 }, 
+			{ 0, 0, 9, 0, 3, 2, 0, 1, 7 } };
+	
+	/*static int sudoku[][] = { 
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+			{ 0, 0, 0, 0, 0, 0, 0, 0, 0 } };*/
 	
 	public List<Integer> initializeValues(node Node){
 		List<Integer> values = new ArrayList<Integer>();
@@ -81,21 +126,17 @@ public class solver {
 		int i=0;
 		while(i < n_possibles.size()){
 			sudoku[actual.row][actual.col] = n_possibles.get(i);
-			/*for (int row = 0; row < 9; row++) {
-				for (int col = 0; col < 9; col++){
-					System.out.print(sudoku[row][col]);
-				}
-				System.out.println();
-		 	}
-			System.out.println();*/
 			
 			//Recursion for the rest of the sudoku
 			boolean next = this.resolveSudoku();
-			if(next == false){
-				i++;
-			}else{
+			if(next == true){
 				return true;
+			}else{
+				sudoku[actual.row][actual.col] = 0;
+				i++;
 			}
+			
+			
 		}
 		return false;
 		
@@ -130,27 +171,29 @@ public class solver {
 		return mNodes;
 	}
 	
-	public static void main() {
+	public static void main(String[] args) {
 		// this function is called just once, and it call the InitializeValues function for each node
 		//It initialize the matrix of nodes, and the array of nodes we will be iterating
-		for (int row = 0; row < 9; row++) {
-                    for (int col = 0; col < 9; col++){
-                        if(sudoku[row][col]==0){
-                            System.out.print("| ");
-                        }else{
-                            System.out.print("|"+sudoku[row][col]);
-                        }
-                    }
-                   System.out.print("|");
-                   System.out.println();
-		 }
-                System.out.println();
-                System.out.println();
+		
 		//Once initialized execute the algorithm
 		//1. order based in possible values (less to more)
 		//2. assign value for first node, and update the rest
 		//3. repeat steps for next node
 		//Constraints: if in the update, one node or more have no more possible answers return to previous node
+		
+		for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++){
+                if(sudoku[row][col]==0){
+                    System.out.print("| ");
+                }else{
+                    System.out.print("|"+sudoku[row][col]);
+                }
+            }
+           System.out.print("|");
+           System.out.println();
+ }
+        System.out.println();
+        System.out.println();
 		
 		boolean resolve = new solver().resolveSudoku();
 		if(resolve){
