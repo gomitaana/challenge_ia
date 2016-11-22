@@ -133,7 +133,19 @@ public class solver {
 	public static void main() {
 		// this function is called just once, and it call the InitializeValues function for each node
 		//It initialize the matrix of nodes, and the array of nodes we will be iterating
-		
+		for (int row = 0; row < 9; row++) {
+                    for (int col = 0; col < 9; col++){
+                        if(sudoku[row][col]==0){
+                            System.out.print("| ");
+                        }else{
+                            System.out.print("|"+sudoku[row][col]);
+                        }
+                    }
+                   System.out.print("|");
+                   System.out.println();
+		 }
+                System.out.println();
+                System.out.println();
 		//Once initialized execute the algorithm
 		//1. order based in possible values (less to more)
 		//2. assign value for first node, and update the rest
@@ -146,8 +158,9 @@ public class solver {
 			
 			for (int row = 0; row < 9; row++) {
 				for (int col = 0; col < 9; col++){
-					System.out.print(sudoku[row][col]);
+					System.out.print("|"+sudoku[row][col]);
 				}
+                                System.out.print("|");
 				System.out.println();
 		 	}
 		}else{
